@@ -15,12 +15,21 @@
 
 \section*{Question 1}
 
-Soit $ v : \text{Var}(\varphi) \to \{0, 1\}$. On cherche à montrer $v(\varphi) = v(\varphi\uparrow^{x})$ (on utilise de la même manière $v$ et son extension inductive à l'ensemble des formules pour plus de lisibilité). \\
+Soit $\varphi$ une formule, $v : \text{Var}(\varphi) \to \{0, 1\}$. On cherche à montrer $v(\varphi) = v(\varphi\uparrow^{x})$ (on utilise de la même manière $v$ et son extension inductive à l'ensemble des formules pour plus de lisibilité). \\
 On a (par une induction triviale) $\forall x \in \text{Var}(\varphi), v(\varphi)=v(\varphi[v(x)/x])$. \\
 Supposons $v(x)=1$. \\
 Alors $\varphi\uparrow^{x} \equiv \varphi[1/x]$ d'où $v(\varphi\uparrow^{x})=v(\varphi[1/x])=v[\varphi(v(x)/x]=v(\varphi)$. \\
 De même si $v(x)=0$ on obtient $v(\varphi\uparrow^{x})=v(\varphi[0/x])=v(\varphi)$. \\
 Toutes les valuations coïncident bien en $\varphi$ et $\varphi\uparrow^{x}$, d'où $\varphi \equiv \varphi\uparrow^{x}$.
 
+\section*{Question 2}
+
+Soit $\varphi$ une formule. $\text{Var}(\varphi)$ est fini, on le note $\{x_1, ... x_n\}$. Pour $i \leq n$, on note $\varphi_{v_1...v_i}$ la formule $\varphi[v_1/x_1,...v_i/x_i]$, où $\{v_1,...v_i\} \in \{0,1\}^i$. On a alors : 
+\begin{itemize}
+ \item D'une part, pour tout $i < n$, $\{v_1,...v_i\} \in \{0,1\}^i$, $$\varphi_{v_1...v_i} \equiv \varphi_{v_1...v_i}\uparrow^{x_{i+1}} \equiv x_{i+1} \to \varphi_{v_1...v_i1}, \varphi_{v_1...v_i0}$$ d'après la question précédente.
+ \item D'autre part, pour tout $i \leq n$, $\{v_1,...v_i\} \in \{0,1\}^i$, $\text{card}(\text{Var}(\varphi_{v_1...v_i})) = n-i$ d'où $\forall \{v_1,...v_n\} \in \{0,1\}^n, \varphi_{v_1...v_n} \equiv 0$ ou $\varphi_{v_1...v_n} \equiv 1$.
+\end{itemize}
+On en déduit que $$\varphi \equiv x_1 \to \varphi_1,\varphi_0 \equiv x_1 \to (x_2 \to \varphi_{11}, \varphi_{01}), (x_2 \to \varphi_{01}, \varphi_{00}) \quad \text{etc.}$$
+d'où le résultat.
 
 \end{document}
