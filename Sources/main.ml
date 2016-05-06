@@ -47,7 +47,20 @@ let apply_neg tabT tabH i =
       t.(j)<- new_id;
       t.(new_id)<- new_id;
       new_id
+    else t.(j)
   in aux i;;
+
+let apply tabT tabH i op bdd1 bdd2 =
+  let t = Array.make MAXINT -1 in
+  t.(0) <- False;
+  t.(1) <- False;
+  let rec aux j = match op with
+    | Et ->
+    | Ou -> apply tabT tabH i Et (apply_neg bdd1) (apply_neg bdd2)
+    | Impl -> apply tabT tabH i Ou (apply_neg bdd1) bdd2
+    | Equiv -> apply tabT tabH (apply tabT tabH i Impl bdd1 bdd2) Impl bdd2 bdd1
+  in aux i
+    ;;
 
 (* creates in tableT tablet and tableH tableh the ROBDD corresponding to the given formula *)
 let rec build tablet tableh formula =
