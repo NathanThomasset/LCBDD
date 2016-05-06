@@ -50,3 +50,9 @@ let rec build tablet tableh formula =
                  in apply tablet tableh Impl u v
     |Iff(f,g) -> let u = build tablet tableh f and v = build tablet tableh g
                  in apply tablet tableh Equiv u v;;
+
+(* tests if the formula represented by its ROBDD is valid *)
+let rec valid tablet id = isOne id;;
+
+(* tests if the formula represented by its ROBDD can be satisfied *)
+let rec sat tablet id = not(valid (apply_neg id));; 
