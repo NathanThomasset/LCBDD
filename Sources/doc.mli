@@ -19,7 +19,7 @@ type 'a formula =
 type prop = P of int;;
 
 (* Printer pour les variables propositionelles, à ne PAS utiliser en toplevel *)
-val print_prop_formula : prop formula -> unit 
+val print_prop_formula : prop formula -> unit
 
 (* Renvoie l'ensemble des variables propositionnelles d'une formule *)
 val atoms : 'a formula -> 'a list
@@ -30,7 +30,7 @@ val tautology : 'a formula -> bool
 (* Vérifie si une formule est satisfiable, algorithme naif *)
 val satisfiable : 'a formula -> bool
 
-(* Affiche le temps de calcul d'une fonction sur un argument et renvoie le résultat *) 
+(* Affiche le temps de calcul d'une fonction sur un argument et renvoie le résultat *)
 val time : ('a -> 'b) -> 'a -> 'b
 
 
@@ -39,7 +39,7 @@ val time : ('a -> 'b) -> 'a -> 'b
 (*                   Types and functions to represent BDDs with tables                      *)
 (*                                                                                          *)
 (********************************************************************************************)
-  
+
 
 (* Les variables sont assimilées à leur position dans l'ordre choisi *)
 type variable = int
@@ -50,7 +50,7 @@ type id = int
 (* Opérateurs binaires *)
 type op = Ou | Et | Impl | Equiv
 
-(* Le type des tables t. A un id  u, associe sa variable x, son fils faible l et son fils fort h  *) 
+(* Le type des tables t. A un id  u, associe sa variable x, son fils faible l et son fils fort h  *)
 type tableT
 
 
@@ -75,7 +75,7 @@ val isZero : id -> bool
 (* test si un id est celui du terminal 1 *)
 val isOne : id -> bool
 
-(* add t i l h  retourne un nouvel id, associé dans t à la variable i, le fils failbe l et le fils fort h *)
+(* add t i l h  retourne un nouvel id, associé dans t à la variable i, le fils faible l et le fils fort h *)
 val add : tableT -> variable -> id -> id -> id
 
 (* var t b; retourne la variable du noeud d'id b *)
@@ -94,7 +94,7 @@ type tableH
 
 (* init_ht n; initialise un tableau ht vide. Pour des
    performances optimales, n devrait être proche de la taille attendue du
-   tableau, mais il grossira si nécessaire. *) 
+   tableau, mais il grossira si nécessaire. *)
 val init_ht : int -> tableH
 
 (* member ht i l h; retourne true si un id avec variable i, fils faible l et fils fort h existe dans ht *)

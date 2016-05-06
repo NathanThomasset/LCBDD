@@ -1,4 +1,4 @@
-(* Example of file when using the compiles mode *) 
+(* Example of file when using the compiles mode *)
 
 open Lib
 open Formulas
@@ -18,7 +18,7 @@ let ht = init_ht taille in
 (* Adding a node for variable x_1, with low son 0 and high son 1 *)
 let u = add t 1 0 1 in
   insert ht 1 0 1 u;
-  
+
   (* Adding a node for variable x_2, with low son 1 and high son u *)
   let v = add t 2 1 u in
     insert ht 2 1 u v;
@@ -26,5 +26,10 @@ let u = add t 1 0 1 in
     debug_print_h ht 10 10;
     print_t t v "bla.dot";;
 
-
-
+(* creates, if necessary, a node with variable i, low l and high h in tableT tablet as well as tableH tableh
+  returns the new node index*)
+let make tablet tableh i l h =
+  if (member tableh i l h) then lookup tableh i l h
+  else let u = add tablet i l h in
+    insert tableh i l h u;
+    u;;
