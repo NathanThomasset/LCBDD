@@ -30,6 +30,7 @@ let u = add t 1 0 1 in
   returns the new node index *)
 let make tablet tableh i l h =
   if (member tableh i l h) then lookup tableh i l h
+  else if (l == h) then l
   else let u = add tablet i l h in
     insert tableh i l h u;
     u;;
