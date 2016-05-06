@@ -1,0 +1,6 @@
+digraph bdd {
+1 [shape=box,label="1"];0 [shape=box,label="0"];2 [label="x1"];2 -> 1;
+2 -> 0 [style="dashed"];
+3 [label="x2"];3 -> 2;
+3 -> 1 [style="dashed"];
+}.
