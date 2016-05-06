@@ -35,6 +35,20 @@ let make tablet tableh i l h =
     insert tableh i l h u;
     u;;
 
+let apply_neg tabT tabH i =
+  let t = Array.make MAXINT -1 in
+  t.(zero) = zero;
+  t.(one) = one;
+  let rec aux j =
+    if j == zero then one
+    else if j == one then zero
+    else if t.(j)==-1 then let new_low, new_high = aux (low tabT j), aux (high tabT j) in
+      let new_id = make tabT tabH (var j) new_low new_high in
+      t.(j)<- new_id;
+      t.(new_id)<- new_id;
+      new_id
+  in aux i;;
+
 (* creates in tableT tablet and tableH tableh the ROBDD corresponding to the given formula *)
 let rec build tablet tableh formula =
   match formula with
@@ -55,4 +69,6 @@ let rec build tablet tableh formula =
 let rec valid tablet id = isOne id;;
 
 (* tests if the formula represented by its ROBDD can be satisfied *)
-let rec sat tablet id = not(valid (apply_neg id));; 
+let rec sat tablet id = not(valid (apply_neg id));;
+
+(* returns, if it exists, a valuation that satisfies the formula represented by its BDD *)
